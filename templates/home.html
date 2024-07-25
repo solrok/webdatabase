@@ -9,20 +9,29 @@
       #banner{
         height: 360px;
         width: 100%;
+        margin-bottom: auto;
 
       }
     </style>
 </head>
 <body>
+  <img class="img-fluid" id="banner" src='https://media.istockphoto.com/id/536245001/photo/job-search-still-life-with-title-jobs.jpg?s=1024x1024&w=is&k=20&c=MfqW_M8T3BMgtkZPQj9t4IBeJbLQ-x1IWiZc-7h18mg=' height="320" width="600" alt="image">
   {% include 'nav.html' %}
   <div class="container">
     <h1 class="text-center mt-2 mb-4">{{company}} career Page</h1>
     <p>Hello there , you'll learn about the job openings at your local company soon.</p>
-  <img class="img-fluid" id="banner" src='https://media.istockphoto.com/id/536245001/photo/job-search-still-life-with-title-jobs.jpg?s=1024x1024&w=is&k=20&c=MfqW_M8T3BMgtkZPQj9t4IBeJbLQ-x1IWiZc-7h18mg=' height="320" width="600" alt="image">
+  
   <h2 class="text-center mt-2 mb-4">About Career</h2>
-  <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <div class="row" style="margin-bottom: 16px;">
+    <div class="col-6">
+      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+      <div class="col-6">
+  <img src="https://media.istockphoto.com/id/1434742171/photo/laptop-ppt-presentation-business-meeting-and-team-working-on-review-for-new-digital-website.jpg?s=2048x2048&w=is&k=20&c=tRBFG2v6KjjzKmtEQBekEG2tdYwGf1C9X4zDGCzeszE=" style="height: 320px; border-radius: 3px;">
+</div>
   <h2 class="text-center mt-2 mb-4">Open Positions</h2>
     <p>
+  
       <div>
       {% for job in jobs %}
         {% include 'jobitem.html' %}
@@ -31,9 +40,9 @@
     </p>
   <div class="text-center">
   <button class="btn btn-primary btn-lg">Contact Us</button>
-  <p>Copyright 2022,Upendra</p>
 </div>
-    {% 'footer.html' %}
+    
 </div>
+{% include 'footer.html' %}
 </body>
 </html>
