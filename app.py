@@ -58,7 +58,13 @@ def list_jobs():
                      'requirements': job.requirements, 'created_at': job.created_at, 'updated_at': job.updated_at} for
                     job in jobs])
 
-
+@app.route('/api/jobs/applications')
+def list_applictions():
+    applications = application.query.all()
+    return jsonify([{'id': application.id, 'job_id': application.job_id, 'full_name': application.full_name, 'email': application.email,
+                     'linkedin_url': application.linkedin_url, 'education': application.education,
+                     'work_experience': application.work_experience, 'resume_url':application.resume_url,'created_at': application.created_at, 'updated_at': application.updated_at} for
+                    application in applications])
 print(__name__)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
