@@ -32,7 +32,11 @@ class Job(db.Model):
 
 class application(db.Model):
     __tablename__ = "applications"
-    id = db.Column()
+    id = db.Column(db.Integer, nullable=False, autoincrement=True)
+    job_id= db.Column(db.Integer, nullable=False)
+    full_name= db.Column(db.String(250), nullable=False)
+    email= db.Column(db.String(250), nullable=False)
+    linkedin_url= db.Column(db.String(250), nullable=False)
 
 @app.route('/')
 def hello_world():
