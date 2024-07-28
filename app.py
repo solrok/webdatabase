@@ -1,17 +1,25 @@
 import os
+import pymysql
 from flask import Flask, render_template, jsonify
 from dotenv import load_dotenv
 from models import db, Job, Application
 
+pymysql.install_as_MySQLdb()
 load_dotenv()
 
 app = Flask(__name__)
-print(os.getenv('SQLALCHEMY_DATABASE_URI'))  # Debug: Check if the variable is loaded correctly
-print(os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS'))  # Debug: Check if the variable is loaded correctly
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS') == 'True'
-if not app.config['SQLALCHEMY_DATABASE_URI']:
+
+db_uri = os.getenv('SQLALCHEMY_DATABASE_URI')
+track_modifications = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
+
+print(f"Database URI: {db_uri}")
+print(f"Track Modifications: {track_modifications}")
+
+if not db_uri:
     raise RuntimeError("The SQLALCHEMY_DATABASE_URI environment variable is not set.")
+
+app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = track_modifications == 'True'
 
 db.init_app(app)
 

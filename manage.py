@@ -1,9 +1,11 @@
 import os
+import pymysql
 from flask import Flask
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 from models import db
 
+pymysql.install_as_MySQLdb()
 load_dotenv()
 
 app = Flask(__name__)
