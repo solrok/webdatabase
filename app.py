@@ -3,7 +3,7 @@ import pymysql
 from flask import Flask, render_template, jsonify
 from dotenv import load_dotenv
 from models import db, Job, Application
-
+from database import load_job_from_db
 pymysql.install_as_MySQLdb()
 load_dotenv()
 
@@ -25,16 +25,15 @@ db.init_app(app)
 
 @app.route('/')
 def hello_world():
-    jobs = Job.query.all()
+    #jobs = Job.query.all()
+    jobs =load_job_from_db()
     return render_template('home.html', jobs=jobs, company='xyz')
-
+    #return render_template('home.html',  company='xyz')
 @app.route('/api/jobs')
 def list_jobs():
-    jobs = Job.query.all()
-    return jsonify([{'id': job.id, 'title': job.title, 'location': job.location, 'salary': job.salary,
-                     'currency': job.currency, 'responsibilities': job.responsibilities,
-                     'requirements': job.requirements, 'created_at': job.created_at, 'updated_at': job.updated_at} for
-                    job in jobs])
+    jobs = load_job_from_db()
+    return jsonify(jobs)
+
 
 @app.route('/api/jobs/applications')
 def list_applications():
