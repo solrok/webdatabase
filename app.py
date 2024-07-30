@@ -3,17 +3,17 @@ import pymysql
 from flask import Flask, render_template, jsonify
 from dotenv import load_dotenv
 from models import db, Job, Application
-from database import load_job_from_db
+from database import load_job_from_db , load_job_from_id
 pymysql.install_as_MySQLdb()
-load_dotenv()
+#load_dotenv()
 
 app = Flask(__name__)
 
 db_uri = os.getenv('SQLALCHEMY_DATABASE_URI')
-track_modifications = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
+track_modifications = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS') == 'True'
 
-print(f"Database URI: {db_uri}")
-print(f"Track Modifications: {track_modifications}")
+# print(f"Database URI: {db_uri}")
+# print(f"Track Modifications: {track_modifications}")
 
 if not db_uri:
     raise RuntimeError("The SQLALCHEMY_DATABASE_URI environment variable is not set.")
@@ -32,6 +32,10 @@ def hello_world():
 @app.route('/api/jobs')
 def list_jobs():
     jobs = load_job_from_db()
+    return jsonify(jobs)
+@app.route("/job/<id>")
+def show_job(id):
+    jobs=load_job_from_id(id)
     return jsonify(jobs)
 
 

@@ -1,4 +1,4 @@
-  <div class="border border-bottom row" style="margin-bottom:16px; padding-bottom:8px; padding-top:4px">
+  <div class="border border-bottom row" style="margin-bottom:16px; padding-bottom:8px; padding-top:16px;">
     <div class="col-10">
       <h4 style="color:rgb(120,120,120); margin-bottom:4px; ">{{job['title']}}</h4>
       <div><b>Location:</b>{{job['location']}}
@@ -10,6 +10,14 @@
       {% endif %}
       </div>
     <div class="col-2" >
-    <a href="mailto:upendrapratapsingh899@gmail.com?subject=Aplication for {{job['title']}}" type="button" class="btn btn-primary">Apply</a>
+    <style>
+        #apply {
+        float: right;
+        margin-top:16px;
+               }
+    </style>
+
+    <a href="mailto:upendrapratapsingh899@gmail.com?subject=Aplication for {{job['title']}}" id="apply" type="button" class="btn btn-primary" >Apply</a>
+
     </div>
   </div>

@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from models import db
 
 pymysql.install_as_MySQLdb()
-load_dotenv()
+#load_dotenv()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
