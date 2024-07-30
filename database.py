@@ -50,10 +50,6 @@ def load_job_from_id(id):
     with engine.connect() as conn:
         result = conn.execute(text("select * from jobs where id = :val"),{"val" :  id})
         column_names = result.keys()
-        # jobs = []
-        # for row in result.fetchall():
-        #     jobs.append(dict(zip(column_names, row)))
-        # return jobs
         rows= result.fetchall()
         if len(rows) == 0:
             return None
