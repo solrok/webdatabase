@@ -54,7 +54,7 @@ def load_job_from_id(id):
         if len(rows) == 0:
             return None
         else:
-            jobs = [dict(zip(column_names, row)) for row in rows]
-            return  jobs
+
+            return  [dict(zip(column_names, row)) for row in rows]
 
 

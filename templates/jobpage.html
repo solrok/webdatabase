@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+       {% for job in job %}
+       <title>{{job.title}} - Careers</title>
+       {% endfor %}
+   </head>
+   <body>
+   <div>
+      {% for job in job %}
+       <h3>Title</h3>
+       <p>{{job.title}}</p>
+       <h3>location</h3>
+       <p>{{job.location}}</p>
+       <h3>salary</h3>
+       <p>{{job.currency}}{{job.salary}}</p>
+       <h3>Responsibilities</h3>
+       <p>{{job.reponsibilities}}</p>
+       <h3>Requirements</h3>
+       <p>{{requirements}}</p>
+        {% endfor %}
+   </div>
+<!--      <h3>Title</h3>-->
+<!--      <p>{{job.title}}</p>-->
+   </body>
+</html>

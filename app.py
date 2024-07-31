@@ -35,8 +35,8 @@ def list_jobs():
     return jsonify(jobs)
 @app.route("/job/<id>")
 def show_job(id):
-    jobs=load_job_from_id(id)
-    return jsonify(jobs)
+    job=load_job_from_id(id)
+    return render_template('jobpage.html',job=job)
 
 
 @app.route('/api/jobs/applications')
