@@ -1,9 +1,9 @@
 import os
 import pymysql
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify , request
 from dotenv import load_dotenv
 from models import db, Job, Application
-from database import load_job_from_db , load_job_from_id
+from database import load_job_from_db , load_job_from_id , add_application_db
 pymysql.install_as_MySQLdb()
 #load_dotenv()
 
@@ -41,13 +41,13 @@ def show_job(id):
     return render_template('jobpage.html',job=job)
 
 
-@app.route('/api/jobs/applications')
-def list_applications():
-    applications = Application.query.all()
-    return jsonify([{'id': application.id, 'job_id': application.job_id, 'full_name': application.full_name, 'email': application.email,
-                     'linkedin_url': application.linkedin_url, 'education': application.education,
-                     'work_experience': application.work_experience, 'resume_url': application.resume_url, 'created_at': application.created_at, 'updated_at': application.updated_at} for
-                    application in applications])
-
+@app.route("/jobs/<id>/apply", methods=['POST'])
+def apply_job(id):
+    # print(f"Apply job ID: {id}")
+    data = request.form
+    job = load_job_from_id(id)
+    add_application_db(id, data)
+    #store in this to db and can send email
+    return render_template('application_submited.html',application=data,job=job)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

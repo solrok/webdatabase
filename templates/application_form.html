@@ -1,0 +1,34 @@
+<h4>Application Form</h4>
+{% for job in job %}
+<form action="/jobs/{{job.id}}/apply" method="post">
+    <div class="mb-2">
+        <label>Full Name:</label><br>
+        <input type="text" name="Full_Name" placeholder="Bruce Wayne" required>
+    </div>
+
+    <div class="mb-2">
+        <label>Email:</label><br>
+        <input type="email" name="Email" placeholder="Bruce@wayne.com" required>
+    </div>
+
+    <div class="mb-2">
+        <label>LinkedIn URL:</label><br>
+        <input type="url" name="LinkedIn_URL" placeholder="https://linkedin.com/in/brucewayne" required>
+    </div>
+    <div class="mb-2">
+        <label>Education</label><br>
+        <textarea name="education">
+        </textarea>
+    </div>
+    <div class="mb-2">
+        <label>Work Experience</label><br>
+        <textarea name="work_experience"></textarea>
+    </div>
+    <div class="mb-2">
+        <label>Resume URL</label><br>
+        <input type="text" name="resume_url">
+    </div>
+
+    <input type="submit" value="Submit">
+</form>
+{% endfor %}

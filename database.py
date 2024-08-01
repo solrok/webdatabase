@@ -57,4 +57,14 @@ def load_job_from_id(id):
 
             return  [dict(zip(column_names, row)) for row in rows]
 
+def add_application_db(job_id,data):
+    with engine.connect() as conn:
+         conn.execute(text("insert into applications (job_id, full_name, email, linkin_url, education, experience, resume_url) value(: job_id, :full_name, :email, :linkin_url, :education, :experience, :resume_url)"),job_id
+                              =job_id, full_name=data['Full_Name'],
+                              email=data['Email'],
+                              education=data['education'],
+                              experience=data['work_experience'],
+                              linkin_url=data['LinkedIn_URL'],
+                              resume_url=data['resume_url'])
+
 

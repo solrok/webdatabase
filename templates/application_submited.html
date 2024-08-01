@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'bootstrap.html' %}
+    <title> Allication Sumbmitted</title>
+</head>
+<body>
+{% include 'banner.html' %}
+  {% include 'nav.html' %}
+<div class="mt-4"> <!-- Adjust the mt-* value as needed -->
+        <div class="container">
+            {% for job in job %}
+            <h1 class="text-center mt-2 mb-4">{{company}} career Page</h1>
+    <p>Your Application for {{job['title']}} Has been sumbitted.</p>
+            {% endfor %}
+<b >Full Name</b>
+<div class="mb-2">{{application['Full_Name']}}</div>
+<b>Email</b>
+<div class="mb-2">{{application['Email']}}</div>
+<b>LinkedIn URL</b>
+<div class="mb-2">{{application['LinkedIn_URL']}}</div>
+<b>Education</b>
+<div class="mb-2">{{application['education']}}</div>
+<b>Work Experience</b>
+<div class="mb-2">{{application['work_experience']}}</div>
+<b>Resume Url</b>
+<div class="mb-2">{{application['resume_url']}}</div>
+    </div>
+</div>
+{% include 'footer.html' %}
+</body>
+</html>
