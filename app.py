@@ -36,6 +36,8 @@ def list_jobs():
 @app.route("/job/<id>")
 def show_job(id):
     job=load_job_from_id(id)
+    if not job:
+        return "NOT Found", 404
     return render_template('jobpage.html',job=job)
 
 

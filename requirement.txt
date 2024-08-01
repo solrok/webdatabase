@@ -1,5 +1,6 @@
 Flask
 gunicorn
 sqlalchemy
-pymsql
+pymysql
 flask-migrate
+cryptography
