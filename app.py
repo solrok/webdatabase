@@ -45,7 +45,12 @@ def show_job(id):
 def apply_job(id):
     data = request.form
     job = load_job_from_id(id)
+
+    if not job:
+        return "Job not found", 404
+
     add_application_db(id, data)
+
     return render_template('application_submited.html', application=data, job=job)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

@@ -64,15 +64,18 @@ def add_application_db(job_id, data):
         VALUES (:job_id, :full_name, :email, :linkedin_url, :education, :work_experience, :resume_url)
     """)
 
-    with engine.connect() as conn:
-        conn.execute(sql, {
-            'job_id': job_id,
-            'full_name': data.get('Full_Name'),
-            'email': data.get('Email'),
-            'linkedin_url': data.get('LinkedIn_URL'),
-            'education': data.get('education'),
-            'work_experience': data.get('work_experience'),
-            'resume_url': data.get('resume_url')
-        })
-
+    try:
+        with engine.connect() as conn:
+            result = conn.execute(sql, {
+                'job_id': job_id,
+                'full_name': data.get('Full_Name'),
+                'email': data.get('Email'),
+                'linkedin_url': data.get('LinkedIn_URL'),
+                'education': data.get('education', ''),  # Default to empty string if not provided
+                'work_experience': data.get('work_experience', ''),  # Default to empty string if not provided
+                'resume_url': data.get('resume_url', '')  # Default to empty string if not provided
+            })
+            print("Insert successful:", result.rowcount)
+    except SQLAlchemyError as e:
+        print(f"Error inserting data: {e}")
 
