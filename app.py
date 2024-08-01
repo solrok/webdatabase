@@ -43,11 +43,9 @@ def show_job(id):
 
 @app.route("/jobs/<id>/apply", methods=['POST'])
 def apply_job(id):
-    # print(f"Apply job ID: {id}")
     data = request.form
     job = load_job_from_id(id)
     add_application_db(id, data)
-    #store in this to db and can send email
-    return render_template('application_submited.html',application=data,job=job)
+    return render_template('application_submited.html', application=data, job=job)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
