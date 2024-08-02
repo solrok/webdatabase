@@ -58,6 +58,10 @@ def load_job_from_id(id):
             return  [dict(zip(column_names, row)) for row in rows]
 
 
+from sqlalchemy.exc import SQLAlchemyError
+
+
+
 def add_application_db(job_id, data):
     sql = text("""
         INSERT INTO applications (job_id, full_name, email, linkedin_url, education, work_experience, resume_url)
@@ -68,14 +72,13 @@ def add_application_db(job_id, data):
         with engine.connect() as conn:
             result = conn.execute(sql, {
                 'job_id': job_id,
-                'full_name': data.get('Full_Name'),
-                'email': data.get('Email'),
-                'linkedin_url': data.get('LinkedIn_URL'),
-                'education': data.get('education', ''),  # Default to empty string if not provided
-                'work_experience': data.get('work_experience', ''),  # Default to empty string if not provided
-                'resume_url': data.get('resume_url', '')  # Default to empty string if not provided
+                'full_name': data.get('Full_Name', ''),
+                'email': data.get('Email', ''),
+                'linkedin_url': data.get('LinkedIn_URL', ''),
+                'education': data.get('education', ''),
+                'work_experience': data.get('work_experience', ''),
+                'resume_url': data.get('resume_url', '')
             })
             print("Insert successful:", result.rowcount)
     except SQLAlchemyError as e:
         print(f"Error inserting data: {e}")
-

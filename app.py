@@ -41,14 +41,16 @@ def show_job(id):
     return render_template('jobpage.html',job=job)
 
 
-@app.route("/jobs/<id>/apply", methods=['POST'])
+@app.route("/job/<id>/apply", methods=['POST'])
 def apply_job(id):
     data = request.form
     job = load_job_from_id(id)
+    job_id=id
 
     if not job:
         return "Job not found", 404
 
+    print("Data received:", data)  # Debugging line
     add_application_db(id, data)
 
     return render_template('application_submited.html', application=data, job=job)
