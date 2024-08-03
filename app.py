@@ -12,7 +12,7 @@ app = Flask(__name__)
 db_uri = os.getenv('SQLALCHEMY_DATABASE_URI')
 track_modifications = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS') == 'True'
 
-# print(f"Database URI: {db_uri}")
+#print(f"Database URI: {db_uri}")
 # print(f"Track Modifications: {track_modifications}")
 
 if not db_uri:
@@ -33,11 +33,15 @@ def hello_world():
 def list_jobs():
     jobs = load_job_from_db()
     return jsonify(jobs)
+
+
 @app.route("/job/<id>")
 def show_job(id):
+
     job=load_job_from_id(id)
+    #return jsonify(job)
     if not job:
-        return "NOT Found", 404
+           return "NOT Found", 404
     return render_template('jobpage.html',job=job)
 
 
@@ -45,13 +49,14 @@ def show_job(id):
 def apply_job(id):
     data = request.form
     job = load_job_from_id(id)
-    job_id=id
+
 
     if not job:
         return "Job not found", 404
 
     print("Data received:", data)  # Debugging line
     add_application_db(id, data)
+    # return jsonify(data)
 
     return render_template('application_submited.html', application=data, job=job)
 if __name__ == '__main__':

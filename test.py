@@ -1,33 +1,21 @@
-from sqlalchemy import create_engine, text
-import os
 import pymysql
+import os
 from dotenv import load_dotenv
+
 load_dotenv()
-pymysql.install_as_MySQLdb()
-# Create an engine
-engine = create_engine(os.getenv('SQLALCHEMY_DATABASE_URI'))
-from sqlalchemy.exc import SQLAlchemyError
-# SQL statement
-sql = text("""
-    INSERT INTO JObS.applications (job_id, full_name, email, linkedin_url, education, work_experience, resume_url)
-    VALUES (:id, :job_id, :full_name, :email, :linkedin_url, :education, :work_experience, :resume_url)
-""")
 
-# Data to insert
-data = {
-    'job_id': 1,
-    'full_name': 'Bruce Wayne',
-    'email': 'Bruce@wayne.com',
-    'linkedin_url': 'https://linkedin.com/in/brucewayne',
-    'education': 'Masters in Business Administration',
-    'work_experience': '5 years at Wayne Enterprises',
-    'resume_url': 'https://example.com/resume.pdf'
-}
+db_uri = os.getenv('SQLALCHEMY_DATABASE_URI')
 
-# Execute the statement
+print(f"Database URI: {db_uri}")
+
 try:
-    with engine.connect() as conn:
-        result = conn.execute(sql, data)
-        print("Insert successful:", result.rowcount)
-except SQLAlchemyError as e:
-    print(f"Error inserting data: {e}")
+    connection = pymysql.connect(
+        host='localhost',
+        user='local',
+        password='12345',
+        database='JObS'
+    )
+    print("Connection successful!")
+    connection.close()
+except pymysql.MySQLError as e:
+    print(f"Error connecting to database: {e}")

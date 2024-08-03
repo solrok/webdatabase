@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-       {% include 'bootstrap.html' %}
-       {% for job in job %}
-       <title>{{job.title}} - Careers</title>
-       {% endfor %}
-   </head>
-   <body>
-   {% include 'nav.html' %}
-   {% include 'banner.html' %}
+<head>
+    {% include 'bootstrap.html' %}
+    {% for job in job %}
+    <title>{{ job.title }} - Careers</title>
+    {% endfor %}
+</head>
+<body>
+    {% include 'nav.html' %}
+    {% include 'banner.html' %}
 
-   <div class="mt-4"> <!-- Adjust the mt-* value as needed -->
+    <div class="mt-4"> <!-- Adjust the mt-* value as needed -->
         <div class="container">
-    <h1 class="text-center mt-2 mb-4">{{company}} career Page</h1>
-      {% for job in job %}
-       <h3 class='mb-2'>{{job.title}}</h3>
-       <p class='lead mt-0'>{{job.location}}</p>
-            <h3>Responsibilities</h3>
-            <ul>
-                {% for line in job.responsibilities.split('\n') %}
-                    <li>{{line}}</li>
-                {% endfor %}
-            </ul>
-       <p>{{job.responsibilities}}</p>
-       <h3>Requirements</h3>
-            <ol>
-                {% for line in job.requirements.split('\n') %}
-                    <li>{{line}}</li>
-                {% endfor %}
-            </ol>
-       <p>{{job.requirements}}</p>
-            <h3>Salary</h3>
-       <p>{{job.currency}}{{job.salary}}</p>
-        {% endfor %}
-             {% include 'application_form.html' %}
-   </div>
+            <h1 class="text-center mt-2 mb-4">{{ company }} career Page</h1>
+            {% for job in job %}
+                <h3 class='mb-2'>{{ job.title }}</h3>
+                <p class='lead mt-0'>{{ job.location }}</p>
 
-   </div>
-   {% include 'footer.html' %}
-   </body>
+                <h3>Responsibilities</h3>
+                <ul>
+                    {% for line in (job.responsibilities or '').split('\n') %}
+                        <li>{{ line }}</li>
+                    {% endfor %}
+                </ul>
+                <p>{{ job.responsibilities }}</p>
+
+                <h3>Requirements</h3>
+                <ol>
+                    {% for line in (job.requirements or '').split('\n') %}
+                        <li>{{ line }}</li>
+                    {% endfor %}
+                </ol>
+                <p>{{ job.requirements }}</p>
+
+                <h3>Salary</h3>
+                <p>{{ job.currency }}{{ job.salary }}</p>
+            {% endfor %}
+            {% include 'application_form.html' %}
+        </div>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>
+
 </html>
